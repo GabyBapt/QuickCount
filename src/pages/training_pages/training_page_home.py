@@ -32,7 +32,7 @@ class TrainingPageHome(QWidget):
        
         
         self.button = QPushButton("New Training")
-        self.button.setIcon(QIcon("./src/icons/plusIcon.svg"))
+        self.button.setIcon(QIcon("./QuickCount/src/icons/plusIcon.svg"))
         self.button.setFont(QFont("Arial", 30))
         self.button.setIconSize(QSize(40, 40))
         

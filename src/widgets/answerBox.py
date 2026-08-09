@@ -63,7 +63,7 @@ class AnswerBox(QFrame):
 
         self.range_slider.setRange(0, 200)
         self.range_slider.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
-        self.range_slider.setMinimumSize(600, 80)
+        self.range_slider.setMinimumSize(200, 80)
         self.range_slider.setEdgeLabelMode(QLabeledRangeSlider.EdgeLabelMode.NoLabel)
         self.range_slider.setBarMovesAllHandles(False)
 
@@ -84,8 +84,8 @@ class AnswerBox(QFrame):
         self.selector.setCurrentWidget(self.range_slider)
 
         self.submit_button = QPushButton("Submit")
-        self.submit_button.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-        self.submit_button.setMinimumSize(240, 80)
+        self.submit_button.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        self.submit_button.setMinimumSize(140, 80)
 
         self.submit_button.setStyleSheet(   
             f""" QPushButton {{
@@ -113,12 +113,11 @@ class AnswerBox(QFrame):
 
         layout = QHBoxLayout()
         layout.addStretch(1)
-        layout.addWidget(self.label, 4)
-        layout.addStretch(3)
-        layout.addWidget(self.selector, 7)
-        layout.addStretch(2)
-        layout.addWidget(self.submit_button, 5)
+        layout.addWidget(self.label, 3)
         layout.addStretch(1)
+        layout.addWidget(self.selector, 7)
+        layout.addStretch(1)
+        layout.addWidget(self.submit_button, 3)
 
         self.setLayout(layout)
        

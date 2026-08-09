@@ -3,6 +3,7 @@ from PySide6.QtGui import Qt, QIcon, QFont
 from PySide6.QtCore import Signal
 from widgets.countdown import Countdown
 from widgets.game import Game
+from config.settings import TrainingSettings
 
 class TrainingPageGame(QWidget):
 
@@ -13,7 +14,8 @@ class TrainingPageGame(QWidget):
         super().__init__()
         self.stack = QStackedWidget()
         self.countdown = Countdown()
-        self.game = Game()
+        self.settings = TrainingSettings()
+        self.game = Game(self.settings)
 
         self.stack.addWidget(self.countdown)
         self.stack.addWidget(self.game)
@@ -43,7 +45,7 @@ class TrainingPageGame(QWidget):
         self.gather_settings()
         self.countdown.start_countdown()
         
-
+    
 
 
     def gather_settings(self):
@@ -53,3 +55,4 @@ class TrainingPageGame(QWidget):
 
     def start_game(self):
         self.stack.setCurrentWidget(self.game)
+        self.game.game_controller.round_loop()
