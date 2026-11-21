@@ -46,7 +46,6 @@ class TrainingPage(QWidget):
         
 
     def showGame(self):
-        self.game_page.gather_settings()
         self.stack.setCurrentWidget(self.game_page)
         self.game_page.pre_game()
 

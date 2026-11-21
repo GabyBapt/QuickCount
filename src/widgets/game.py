@@ -4,16 +4,19 @@ from PySide6.QtCore import QTimer
 from widgets.answerBox import AnswerBox
 from controllers.game_controller import GameController
 from widgets.gameGrid import GameGrid
+from config.settings import settings
 
 
 class Game(QWidget):
-    def __init__(self, Settings):
+    def __init__(self):
         super().__init__()
+
+        self.settings = settings
 
         self.setup_widgets()
         self.setup_layout()
        
-        self.game_controller = GameController(Settings)
+        self.game_controller = GameController(self.settings)
 
         self.setup_connections()
 
@@ -46,10 +49,11 @@ class Game(QWidget):
                    }
                    """)
         self.game_grid = GameGrid()
-        
 
+        self.game_frame.setLayout(QVBoxLayout())
+        self.game_frame.layout().addWidget(self.game_grid, 1)
 
-        self.answer_box = AnswerBox()
+        self.answer_box = AnswerBox(self.settings.value("mode", type=int))
 
 
     def setup_connections(self):

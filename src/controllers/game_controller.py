@@ -10,13 +10,13 @@ class GameController(QObject):
     def __init__(self, Settings):
         super().__init__()
         self.settings = Settings
-        self.draw_time = self.settings.time
+        self.draw_time = int(self.settings.value("time", type=float)*1000)
         self.score_controller = ScoreController()
         
         self.draw_timer = QTimer()
         self.draw_timer.setSingleShot(True)
         self.draw_timer.stop()
-        self.draw_timer.setInterval(1000 * self.draw_time)
+        self.draw_timer.setInterval(self.draw_time)
         self.draw_timer.timeout.connect(self.hide_items)
 
 

@@ -1,6 +1,5 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QGridLayout
 from PySide6.QtGui import QFont, Qt
-from PySide6.QtCanvasPainter import QCanvasPainter
 
 class GameGrid(QWidget):
     def __init__(self):

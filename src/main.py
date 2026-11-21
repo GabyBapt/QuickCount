@@ -1,16 +1,24 @@
 from PySide6.QtWidgets import *
 from PySide6.QtGui import QFont, QFontDatabase
+import sys
+
+app = QApplication(sys.argv)
+app.setOrganizationName("GabyDev")
+app.setApplicationName("QuickCount")
+
 from pages.training_pages.training_page import TrainingPage
 from pages.stats_page import StatPage
 from widgets.navbar import NavBar
 
-import sys
+
+
 
 class MainWindow(QMainWindow):
 
     def __init__(self):
 
         super().__init__()
+
         
         
         self.setWindowTitle("My App")
@@ -66,7 +74,8 @@ class MainWindow(QMainWindow):
         self.pages.setCurrentIndex(1)
         
 
-app = QApplication(sys.argv)
+
+
 
 window = MainWindow()
 window.show()

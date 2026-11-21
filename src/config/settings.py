@@ -1,9 +1,17 @@
+from PySide6.QtCore import QSettings
 
+DEFAULT_SETTINGS = {
+    "mode": int(0),
+    "range": (0, 40),
+    "time": 3.0,
+}
 
-
-class TrainingSettings():
+class TrainingSettings(QSettings):
     def __init__(self):
-        self.mode = 0
-        self.range = (0, 20)
-        self.time = float(3)
+        super().__init__()
+        for key, value in DEFAULT_SETTINGS.items():
+            if self.value(key) is None:
+                self.setValue(key, value)
+
+settings = TrainingSettings()
         

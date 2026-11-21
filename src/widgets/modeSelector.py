@@ -16,7 +16,7 @@ class modeSelector(QWidget):
 
 
         self.modeIndex = None
-        
+                                
         
     def setup_widgets(self):
         self.label = QLabel("Game Mode :") 

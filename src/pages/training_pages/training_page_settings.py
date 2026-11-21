@@ -4,7 +4,7 @@ from PySide6.QtCore import QSize
 from widgets.modeSelector import modeSelector
 from widgets.rangeSelector import rangeSelector
 from widgets.timeSelector import timeSelector
-from config.settings import TrainingSettings
+from config.settings import settings
 
 
 
@@ -17,8 +17,9 @@ class TrainingPageSettings(QWidget):
        
 
         
-        self.settings = TrainingSettings()
-        
+        self.settings = settings
+
+
         layout = QVBoxLayout()
 
 
@@ -35,6 +36,8 @@ class TrainingPageSettings(QWidget):
         self.modeSelectorWidget = modeSelector()
         self.rangeSelectorWidget = rangeSelector()
         self.timeSelectorWidget = timeSelector()
+
+        self.connect_signals()
 
         self.startButton = QPushButton("Start")
         self.startButton.setFont(QFont("Arial", 30))
@@ -69,6 +72,30 @@ class TrainingPageSettings(QWidget):
 
         
     def load_settings(self):
-        self.rangeSelectorWidget.update_range(self.settings.range)
-        self.modeSelectorWidget.update_mode(self.settings.mode)
-        self.timeSelectorWidget.update_time(self.settings.time)
+        self.rangeSelectorWidget.update_range(self.settings.value("range"))
+        print("Loaded range from settings:", type(self.settings.value("range")[0]))
+        self.modeSelectorWidget.update_mode(self.settings.value("mode", type=int))
+        self.timeSelectorWidget.update_time(self.settings.value("time", type=float))
+
+    def connect_signals(self):
+        self.modeSelectorWidget.mode_changed.connect(self.update_mode)
+        self.rangeSelectorWidget.range_changed.connect(self.update_range)
+        self.timeSelectorWidget.time_changed.connect(self.update_time)
+
+
+    def update_mode(self, mode):
+        self.settings.setValue("mode", mode)
+        self.settings.sync()
+        
+
+    def update_range(self, min_value, max_value):
+        self.settings.setValue("range", (min_value, max_value))
+        self.settings.sync()
+        
+        
+
+    def update_time(self, time):
+        self.settings.setValue("time", time)
+        self.settings.sync()
+        
+        

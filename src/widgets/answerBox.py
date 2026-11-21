@@ -12,10 +12,12 @@ class AnswerBox(QFrame):
     range_answer_changed = Signal(int, int)
     
 
-    def __init__(self):
+    def __init__(self, gamemode):
         
         
         super().__init__()
+
+        self.gamemode = gamemode
 
         self.accent = QColor(self.palette().color(QPalette.ColorRole.Highlight).name())
         
@@ -53,7 +55,7 @@ class AnswerBox(QFrame):
         self.range_slider = QLabeledRangeSlider(Qt.Orientation.Horizontal)
 
 
-        self.exact_spinbox.setStyle(QStyleFactory.create("windows"))
+        #self.exact_spinbox.setStyle(QStyleFactory.create("windows"))
         self.exact_spinbox.lineEdit().setPlaceholderText("Enter a number ")
         self.exact_spinbox.clear()
         self.exact_spinbox.setFont(QFont("Arial Black", 10))
@@ -81,7 +83,10 @@ class AnswerBox(QFrame):
                                    }
                                    """)
         
-        self.selector.setCurrentWidget(self.range_slider)
+        if self.gamemode == 0 :
+            self.selector.setCurrentWidget(self.exact_spinbox)
+        elif self.gamemode == 1 :
+            self.selector.setCurrentWidget(self.range_slider)
 
         self.submit_button = QPushButton("Submit")
         self.submit_button.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)

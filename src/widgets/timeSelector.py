@@ -1,7 +1,8 @@
 from PySide6.QtWidgets import QPushButton, QWidget, QVBoxLayout, QLabel, QStackedWidget, QFrame, QHBoxLayout, QSpinBox, QStyleFactory, QDoubleSpinBox
 from PySide6.QtGui import Qt, QIcon, QFont
 from PySide6.QtCore import QSize, Signal
-from superqt import QLabeledDoubleSlider
+from superqt import QDoubleSlider
+from config.settings import settings
 
 class timeSelector(QWidget):
 
@@ -10,6 +11,7 @@ class timeSelector(QWidget):
     def __init__(self):
         super().__init__()
 
+        self.settings = settings
        
         self.setup_widgets()
         self.setup_layout()
@@ -21,7 +23,7 @@ class timeSelector(QWidget):
         self.label = QLabel("Counting Time :") 
         self.label.setFont(QFont("Arial", 17)) 
 
-        self.slider = QLabeledDoubleSlider(Qt.Orientation.Horizontal)
+        self.slider = QDoubleSlider(Qt.Orientation.Horizontal)
         self.slider.setRange(0, 10)
         
 
@@ -30,7 +32,7 @@ class timeSelector(QWidget):
  
         style = QStyleFactory.create("Windows")
 
-        self.time_spinbox.setStyle(style)
+        #self.time_spinbox.setStyle(style)
 
         
 
@@ -58,15 +60,17 @@ class timeSelector(QWidget):
 
     def slider_movement(self, value):
         self.time_spinbox.setValue(value)
+        self.time_changed.emit(value)
 
     def spinbox_update(self, value):
         self.slider.setValue(value)
+        self.time_changed.emit(value)
 
     def update_time(self, time): 
 
         self.time_spinbox.blockSignals(True)
        
-
+        
         self.time_spinbox.setValue(time)
         self.slider.setValue(time)
 

@@ -40,8 +40,8 @@ class rangeSelector(QWidget):
         self.max_spinbox.setRange(0, 200)
         style = QStyleFactory.create("windowsvista")
 
-        self.max_spinbox.setStyle(self.style)
-        self.min_spinbox.setStyle(self.style)
+        #self.max_spinbox.setStyle(self.style)
+        #self.min_spinbox.setStyle(self.style)
 
 
     def setup_layout(self):
